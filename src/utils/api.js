@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const TMDB_ACCESS_TOKEN = import.meta.env.VITE_TMDB_ACCESS_TOKEN;
-const TMDB_API_URL = import.meta.env.VITE_TMDB_API_URL;
+const TMDB_ACCESS_TOKEN =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YWQ5NmRjZTkzMDhmMTZlOGJkNzhlOWVlMzg4YjhhZiIsInN1YiI6IjY0MTAyYTdiYzM5MGM1MDBhNDY3YTg2YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Fbb-PnO81YwFAsGot5r4bB8bk67BYsMeyBTjKnbeeZo";
+const TMDB_API_URL = "https://api.themoviedb.org/3";
 console.log("TMDB_ACCESS_TOKEN:", TMDB_ACCESS_TOKEN);
 console.log("TMDB_API_URL:", TMDB_API_URL);
 const axiosInstance = axios.create({

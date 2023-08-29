@@ -44,7 +44,7 @@ const SearchMoviesPage = () => {
     <div className="container mx-auto mt-8">
       <div className="mb-4">
         <h1 className="text-3xl font-semibold mb-2">Search Movies</h1>
-        <div className="flex space-x-4">
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
           <input
             type="text"
             className="border rounded px-2 py-1"
@@ -57,14 +57,13 @@ const SearchMoviesPage = () => {
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
           >
-            <option value="">Select Language</option>=
+            <option value="">Select Language</option>
             {languages.map((language) => (
               <option key={language.id} value={language.id}>
                 {language.name}
               </option>
             ))}
           </select>
-
           <button
             className="bg-blue-500 text-white rounded px-4 py-1"
             onClick={handleSearch}
@@ -73,6 +72,7 @@ const SearchMoviesPage = () => {
           </button>
         </div>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
