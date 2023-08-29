@@ -1,32 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { FaHeart } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addFavorite,
+  removeFavorite,
+} from "../features/favorites/favoritesSlice";
 
 const MovieCard = ({ movie }) => {
   const { id, title, poster_path, release_date, overview } = movie;
-  const [isFavorite, setIsFavorite] = useState(false);
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favorites);
 
-  useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-    const isAlreadyFavorite = favorites.some((fav) => fav.id === id);
-    setIsFavorite(isAlreadyFavorite);
-  }, [id]);
+  const isFavorite = favorites.some((fav) => fav.id === id);
 
   const handleFavoriteClick = () => {
-    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-    const isAlreadyFavorite = favorites.some((fav) => fav.id === id);
-
-    if (isAlreadyFavorite) {
-      const updatedFavorites = favorites.filter((fav) => fav.id !== id);
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    if (isFavorite) {
+      dispatch(removeFavorite(id));
     } else {
-      const newFavorite = { id, title, poster_path, release_date, overview };
-      localStorage.setItem(
-        "favorites",
-        JSON.stringify([...favorites, newFavorite])
-      );
+      dispatch(addFavorite(movie));
     }
-
-    setIsFavorite(!isFavorite);
   };
 
   return (
@@ -47,13 +40,12 @@ const MovieCard = ({ movie }) => {
           {overview}
           <span className="ml-1 text-gray-400">...</span>
         </p>
-        <button
-          onClick={handleFavoriteClick}
-          className={`mt-2 ${
-            isFavorite ? "bg-red-500" : "bg-green-500"
-          } px-4 py-2 rounded-md text-white`}
-        >
-          {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+        <button onClick={handleFavoriteClick} className="mt-2 px-4 py-2">
+          <FaHeart
+            className={` ${
+              isFavorite ? "text-red-500" : "text-gray-700"
+            } w-6 h-6 rounded-md `}
+          />
         </button>
       </div>
     </div>

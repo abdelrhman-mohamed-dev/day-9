@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
+// pages/FavoritesPage.js
+import React from "react";
+import { useSelector } from "react-redux";
 import MovieCard from "../components/MovieCard";
 
 const FavoritesPage = () => {
-  const [favorites, setFavorites] = useState([]);
-
-  useEffect(() => {
-    const storedFavorites = JSON.parse(
-      localStorage.getItem("favorites") || "[]"
-    );
-    setFavorites(storedFavorites);
-  }, [favorites]);
+  const favorites = useSelector((state) => state.favorites);
 
   return (
     <div className="container mx-auto mt-8">
