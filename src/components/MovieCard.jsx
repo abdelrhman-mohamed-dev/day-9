@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { FaHeart } from "react-icons/fa6";
+import { FaHeart, FaCartShopping } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -54,13 +53,12 @@ const MovieCard = ({ movie }) => {
           <span className="ml-1 text-gray-400">...</span>
         </p>
         <div className="flex justify-between">
-          <button
-            onClick={handleCartClick}
-            className={`mt-2 ${
-              isAddedToCart ? "bg-green-500" : "bg-gray-300"
-            } px-4 py-2 rounded-md text-white`}
-          >
-            {isAddedToCart ? "Remove from Cart" : "Add to Cart"}
+          <button onClick={handleCartClick} className="mt-2 px-4 py-2">
+            <FaCartShopping
+              className={`${
+                isAddedToCart ? "text-green-500" : "text-gray-700"
+              } w-6 h-6 rounded-md `}
+            />
           </button>
           <button onClick={handleFavoriteClick} className="mt-2 px-4 py-2">
             <FaHeart
