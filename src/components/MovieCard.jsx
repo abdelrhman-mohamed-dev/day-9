@@ -6,10 +6,23 @@ import {
   addFavorite,
   removeFavorite,
 } from "../features/favorites/favoritesSlice";
-
+import { addToCart, removeFromCart } from "../features/cart/cartSlice";
 const MovieCard = ({ movie }) => {
   const { id, title, poster_path, release_date, overview } = movie;
   const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.cart);
+
+  const isAddedToCart = cart.some((item) => item.id === id);
+
+  const handleCartClick = () => {
+    if (isAddedToCart) {
+      dispatch(removeFromCart(id));
+    } else {
+      dispatch(addToCart(movie));
+    }
+  };
+
   const favorites = useSelector((state) => state.favorites);
 
   const isFavorite = favorites.some((fav) => fav.id === id);
@@ -40,13 +53,23 @@ const MovieCard = ({ movie }) => {
           {overview}
           <span className="ml-1 text-gray-400">...</span>
         </p>
-        <button onClick={handleFavoriteClick} className="mt-2 px-4 py-2">
-          <FaHeart
-            className={` ${
-              isFavorite ? "text-red-500" : "text-gray-700"
-            } w-6 h-6 rounded-md `}
-          />
-        </button>
+        <div className="flex justify-between">
+          <button
+            onClick={handleCartClick}
+            className={`mt-2 ${
+              isAddedToCart ? "bg-green-500" : "bg-gray-300"
+            } px-4 py-2 rounded-md text-white`}
+          >
+            {isAddedToCart ? "Remove from Cart" : "Add to Cart"}
+          </button>
+          <button onClick={handleFavoriteClick} className="mt-2 px-4 py-2">
+            <FaHeart
+              className={` ${
+                isFavorite ? "text-red-500" : "text-gray-700"
+              } w-6 h-6 rounded-md `}
+            />
+          </button>
+        </div>
       </div>
     </div>
   );

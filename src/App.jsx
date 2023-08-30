@@ -6,6 +6,7 @@ import MovieDetailPage from "./pages/MovieDetailPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
+import CartPage from "./pages/CartPage";
 
 function App() {
   const Layout = () => {
@@ -37,6 +38,10 @@ function App() {
         {
           path: "/favorites",
           element: <FavoritesPage />,
+        },
+        {
+          path: "/cart",
+          element: <CartPage />,
         },
       ],
     },

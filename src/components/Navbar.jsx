@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaCartShopping } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa6";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,7 +14,7 @@ const Navbar = () => {
         <Link to="/" className="text-white text-lg font-semibold">
           Movie App
         </Link>
-        <div className="hidden md:flex space-x-4">
+        <div className="hidden md:flex space-x-4 items-center">
           <Link to="/" className="text-white hover:underline">
             Popular Movies
           </Link>
@@ -20,7 +22,10 @@ const Navbar = () => {
             Search Movies
           </Link>
           <Link to="/favorites" className="text-white hover:underline">
-            Favorites
+            <FaHeart />
+          </Link>
+          <Link to="/cart" className="text-white hover:underline">
+            <FaCartShopping />
           </Link>
         </div>
         <div className="md:hidden">
@@ -64,6 +69,13 @@ const Navbar = () => {
                 onClick={handleMenuOpen}
               >
                 Favorites
+              </Link>
+              <Link
+                to="/cart"
+                className="block text-white hover:underline"
+                onClick={handleMenuOpen}
+              >
+                Cart
               </Link>
             </div>
           )}
